@@ -1,0 +1,14 @@
+// @import "../../node_modules/nord/src/sass/nord.scss";
+@import "qqstyle.scss";
+@import './font/fonts.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+ul, ol, li {
+  list-style: none;
+}

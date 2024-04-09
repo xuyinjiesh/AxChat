@@ -1,0 +1,74 @@
+@import "globals.scss";
+
+.MessagesWrapper {
+  flex: 15;
+  background-color: $qqwhite1d;
+  overflow: auto;
+  padding: 20px 5px 0px 5px;
+
+  &:not(:hover) {
+    &::-webkit-scrollbar-thumb {
+      background: $qqwhite1d;
+    }
+  }
+  
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: $qqwhite2d;
+  }
+
+
+  border-top: 1px solid $qqwhite2d;
+  border-bottom: 1px solid $qqwhite2d;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  
+  .MessageWrapper {
+    display: flex;
+    align-items: left;
+
+    .PortraitWrapper {
+      width: 60px;
+      position: relative;
+      .Portrait {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .Message {
+      
+      flex: 0.93; 
+      user-select: text;      
+      max-width: max-content;
+      background-color: white;
+      padding: 10px 20px;
+      border-radius: 10px 10px 10px 10px;
+      &::selection {
+        background-color: $qqblue2l;
+      }
+    }
+    &.owner {
+      flex-direction: row-reverse;
+      .Message {
+        background-color: $qqblue00;
+        color: white;
+      }
+    }
+  }
+
+}
+
+

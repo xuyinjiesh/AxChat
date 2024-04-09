@@ -1,0 +1,58 @@
+@import "globals.scss";
+
+.formContainer {
+  background-color: $qqwhite00;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .formWrapper {
+    background-color: white;
+    padding: 20px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+    .logo {
+      color: $qqblue00;
+      font-weight: bold;
+      font-size: 28px;
+    }
+    
+    .title {
+      padding-bottom: 10px;
+      color: $qqblue00;
+      font-size: 18px;      
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      input {
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid $qqwhite00;
+        &::placeholder {
+          color: $qqblack2l; 
+        }
+      }
+      button {
+        background-color: $qqblue00;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    p {
+      color: $qqblue00;
+      font-size: 14px;
+    }
+  }
+}
+
