@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MessagesWrapper from "./MessagesWrapper";
 
 function ChatRoom() {
+  const [plugins, setPlugins] = useState([]);
+  useEffect(() => {
+    fetch("")
+      .then((res) => { return res.json(); })
+      .then((plugin) => { setPlugins(plugin) });
+  });
+  
   return (
     <div className="ChatRoom">
       <div className="HeaderWrapper">
         <div className="UserName">ChatGPT</div>
         <div className="ToolBar">
-          <div className="Tool">查找</div>
-          <div className="Tool">翻译</div>
+          {/* {
+            plugins.map((plugin) =>
+            (<buttom className="Tool" onClick={plugin.name}>
+              plugin.name
+            </buttom>)
+            )
+          } */}
         </div>
       </div>
       <MessagesWrapper/>
