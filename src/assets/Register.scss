@@ -17,6 +17,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    // backdrop-filter: blur(60px);
     
     .logo {
       color: $qqblue00;
@@ -37,6 +38,7 @@
       gap: 20px;
 
       input {
+        width: 200px;
         padding: 10px;
         border: none;
         outline: none;
@@ -45,22 +47,8 @@
           color: $qqblack2l; 
         }
       }
-      label {
-        color: $qqblack2l;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        
-        img {
-          width: 32px;
-          height: 32px;
-          object-fit: cover;
-        }
-      }
-    
-      button {
+      
+      input[type="submit"] {
         background-color: $qqblue00;
         width: 160px;
         color: white;
@@ -69,6 +57,7 @@
         border-radius: 5px;
         cursor: pointer;
       }
+    
     }
     p {
       color: $qqblue00;

@@ -8,9 +8,9 @@ function Login() {
         <span className="logo">AxChat</span>
         <span className="title">登录</span>
         <form>
-          <input type="email" placeholder="邮箱" />
+          <input type="phoneNumber" placeholder="手机号" />
           <input type="password" placeholder="密码" />
-          <Link to="/"><button>登录</button></Link>
+          <Link to="/"><input type="submit"/></Link>
         </form>
         <p>没有账户? <Link to="/register">注册</Link></p>
       </div>
