@@ -18,7 +18,7 @@ function ChatRoom() {
           {
             pluginsForMessages.map((plugin) =>
             (<button className="Tool" onClick={() => plugin.switch(dom)}>
-              { plugin.name }
+              { plugin.icon }
             </button>)
             )
           }
@@ -27,14 +27,14 @@ function ChatRoom() {
       <MessagesWrapper/>
       <div className="InputWrapper">
         <div className="ToolBar">
-          <i className="Tool fa-regular fa-face-smile"></i>
-          <i className="Tool fa-regular fa-folder"></i>
-          <i className="Tool fa-regular fa-image"></i>
-          <i className="Tool fa-solid fa-microphone"></i>
+          <button className="Tool"><i className="fa-regular fa-face-smile"></i></button>
+          <button className="Tool"><i className="fa-regular fa-folder"></i></button>
+          <button className="Tool"><i className="fa-regular fa-image"></i></button>
+          <button className="Tool"><i className="fa-solid fa-microphone"></i></button>
           {
             pluginsForInput.map((plugin) =>
             (<button className="Tool" onClick={() => plugin.switch(dom)}>
-              { plugin.name }
+              { plugin.icon }
             </button>)
             )
           }

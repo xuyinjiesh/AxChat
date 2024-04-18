@@ -7,35 +7,27 @@
   justify-content: center;
   
   .HomeContainer {
+
     width: 100%;
     height: 100%;
     border: none;
     display: flex;
 
     .ChatCorridor {
-      width: 300px;
-      overflow: hidden;
-      resize: horizontal;
-      min-width: 200px;
-      max-width: 400px;
-      cursor: col-resize;
-
-      &::-webkit-scrollbar {
-        width: 200px; height: 200px;
-      }
-
+      width: 100%;
       background-color: $qqwhite00;
-      
       display: flex;
       flex-direction: column;
       
       .ChatBriefWrapper {
+    
         width: 100%;
         height: 80px;
         display: flex;
         align-items: center;
         
         .Portrait {
+          flex: 0 0 40px;
           width: 40px;
           height: 40px;
           border-radius: 50%;
@@ -44,14 +36,14 @@
         }
       
         .Info {
-          width: 100%;
+          flex: 1;
+          width: calc(100% - 60px);
           height: 100%;
           display: flex;
           flex-direction: column;
           padding: 10px 0px;
           justify-content: space-around;
           .NameAndTime {
-            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -69,9 +61,10 @@
           }
 
           .Message {
+            position: relative;
             font-size: 13px;
             user-select: none;
-            width: 200px;
+            width: calc(100% - 10px);
             color: $qqblack2l;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -90,7 +83,7 @@
     
     .ChatRoom {
       background-color: $qqwhite1d;
-      flex-grow: 1;
+      flex: 1;
       display: flex;
       flex-direction: column;
       
@@ -133,7 +126,11 @@
           padding-left: 5px;
           .Tool {
             padding-right: 20px;
-            font-size: 18px;
+            height: 30px;
+            border: none;
+            i {
+              font-size: 18px;
+            }            
             &:hover {
               color: $qqblue00;
             }

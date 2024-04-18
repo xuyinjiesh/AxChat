@@ -3,6 +3,7 @@ export class Plugin {
   constructor(name) {
     this.name = name;
     this.isRunning = false;
+    this.icon = name;
   }
   
   switch(dom) {

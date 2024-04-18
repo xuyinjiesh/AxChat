@@ -1,9 +1,12 @@
 import React from "react";
 import test_img from "../assets/test-img.jpg"
 
-function ChatCorridor() {
+function ChatCorridor({sidebarWidth}) {
   return (
-    <div className="ChatCorridor">
+    <div className="ChatCorridor" style={{
+      width: sidebarWidth,
+      flex: `0 0 ${sidebarWidth}px`,
+    }}>
       <div className="ChatBriefWrapper">
         <img className="Portrait" src={test_img} />
         <div className="Info">
@@ -11,7 +14,7 @@ function ChatCorridor() {
             <div className="Name">ChatGPT</div>
             <div className="Time">昨天</div>
           </div>
-          <div className="Message">朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山。</div>
+          <span className="Message">朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山。</span>
         </div>
       </div>
 
@@ -22,7 +25,7 @@ function ChatCorridor() {
             <div className="Name">李四</div>
             <div className="Time">昨天</div>
           </div>
-          <div className="Message">在吗</div>
+          <p className="Message">在吗</p>
         </div>
       </div>
 
