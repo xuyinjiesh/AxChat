@@ -1,35 +1,58 @@
-import React, { useEffect, useState } from "react";
-import ChatCorridor from "../components/ChatCorridor";
-import ChatRoom from "../components/ChatRoom";
 import '../assets/Home.scss';
+import React, { useEffect, useState } from "react";
+import { Collapse, Layout, Menu, theme } from "antd";
+import {
+  MessageOutlined,
+  TeamOutlined,
+  RobotOutlined,
+  AppstoreOutlined,
+  SettingOutlined
+} from "@ant-design/icons";
+import ChatContainer from "./ChatContainer";
+import Sider from "antd/es/layout/Sider";
+import test_img from "../assets/test-img.jpg";
 
 
+const items = [
+  {
+    key: '1', icon: <MessageOutlined />,
+    window: (
+      <ChatContainer/>
+    )
+  },
+  {
+    key: '2', icon: <TeamOutlined />,
+  },
+  { key: '3', icon: <RobotOutlined /> },
+  { key: '4', icon: <AppstoreOutlined />},
+  { key: '5', icon: <SettingOutlined /> },
+];
 
 function Home() {
-  const [sidebarWidth, setSidebarWidth] = useState(300);
-  const handleMouseDown = (e) => {
-    e.preventDefault();
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-  };
-  const handleMouseMove = (e) => {
-    setSidebarWidth(e.clientX);
-  };
-  const handleMouseUp = (e) => {
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
-  };
+  // const handleClick = (item) => {
+  //   if()
+  // };
+  // const {
+  //   token: { colorBgContainer, borderRadiusLG },
+  // } = theme.useToken();
 
   return (
-    <div className="Home">
-      <div className="HomeContainer">
-        <ChatCorridor sidebarWidth={sidebarWidth}/>
-        <div className="Sidebar"
-          style={{ width: `4px`, height: `100%`, cursor: `w-resize` }}
-          onMouseDown={handleMouseDown}>
-        </div>
-        <ChatRoom />
-      </div>
+    <div className="HomeContainer">
+        <Layout style={{minHeight: '100vh'}}>
+          <Sider theme="light" collapsed="true" collapsedWidth="60px">
+            <img className="Advator" src={test_img}/>
+            <Menu
+              items={items}
+              defaultSelectedKeys={['1']}
+              theme="light"
+            />
+          </Sider>
+            {
+              items.map((item) => {
+                return item.window;
+              })
+            }
+        </Layout>
     </div> 
   );
 };
