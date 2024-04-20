@@ -4,7 +4,7 @@ import test_img from "../assets/test-img.jpg"
 import { Link } from 'react-router-dom'
 import addAvatorImage from "../assets/img/addAvatar.png";
 
-function Register() {
+function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [passwd, setPasswd] = useState("");
@@ -41,4 +41,4 @@ function Register() {
   );
 };
 
-export default Register;
+export default RegisterPage;
