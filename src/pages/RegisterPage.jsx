@@ -15,7 +15,6 @@ function RegisterPage() {
     postData.append("name", name);
     postData.append("email", email);
     postData.append("passwd", passwd);
-
     let response = await fetch("", {
       method: "POST", 
       body: postData

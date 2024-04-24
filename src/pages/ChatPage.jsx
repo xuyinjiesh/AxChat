@@ -26,10 +26,10 @@ const ChatContainer = () => {
   return (
     <div className="ChatContainer">
       <ChatCorridor sidebarWidth={sidebarWidth} />
-        <div className="Sidebar"
-          style={{ width: `4px`, height: `100%`, cursor: `w-resize` }}
-          onMouseDown={handleMouseDown}>
-        </div>
+      <div className="Sidebar"
+        style={{ width: `4px`, height: `100%`, cursor: `w-resize` }}
+        onMouseDown={handleMouseDown}>
+      </div>
       <Outlet />
     </div>
   );
