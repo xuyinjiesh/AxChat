@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+import RegisterPage, { action as registerAction } from './pages/RegisterPage';
+import LoginPage, { action as loginAction } from './pages/LoginPage';
 import Root, { loader as rootLoader } from './pages/Root';
 import ChatPage, { loader as chatLoader } from './pages/ChatPage';
 import ChatPageIndex from './pages/ChatPageIndex';
@@ -9,26 +9,27 @@ import ContactPage from './pages/ContactPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
 import ChatRoom from './components/ChatRoom';
+import { createContext, useState } from 'react';
 
 const router = createBrowserRouter([
   {
     path: "/Register",
-    element: <RegisterPage/>
+    element: <RegisterPage />,
+    action: registerAction,
   },
   {
     path: "/login",
-    element: <LoginPage/>
+    element: <LoginPage />,
+    // action: loginAction,
   },
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    loader: rootLoader,
     children: [
       {
         path: "chat",
         element: <ChatPage />,
-        // loader: chatLoader,
         children: [
           {
             index: true,
@@ -48,10 +49,15 @@ const router = createBrowserRouter([
   },
 ]);
 
+export const UserContext = createContext();
 
 function App() {
+  const [user, setUser] = useState();
+
   return (
-    <RouterProvider router={router} />
+    <UserContext.Provider value={{user, setUser}}>
+      <RouterProvider router={router} />
+    </UserContext.Provider>
   );
 }
 

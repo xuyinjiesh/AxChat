@@ -12,7 +12,8 @@ import { Form } from "react-router-dom";
 //   return { info };
 // }
 
-function ChatCorridor({sidebarWidth}) {
+function ChatCorridor({ sidebarWidth }) {
+
   return (
     <div className="ChatCorridor" style={{
       width: sidebarWidth,
