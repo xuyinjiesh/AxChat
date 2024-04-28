@@ -20,7 +20,7 @@ const items = [
   { key: '1', icon: <Link to="chat"><MessageOutlined /></Link>},
   { key: '2', icon: <Link to="contact"><TeamOutlined /></Link>},
   { key: '3', icon: <RobotOutlined />},
-  { key: '4', icon: <AppstoreOutlined />},
+  { key: '4', icon: <Link to="plugin"><AppstoreOutlined /></Link>},
   { key: '5', icon: <SettingOutlined />},
 ];
 

@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
 import ChatRoom from './components/ChatRoom';
 import { createContext, useState } from 'react';
+import PluginPage from './pages/PluginPage';
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />
-      }
+      },
+      {
+        path: "plugin",
+        element: <PluginPage />
+      },
     ]
   },
 ]);

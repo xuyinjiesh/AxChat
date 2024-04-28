@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import '../assets/Login.scss';
 import { Form, Link, redirect, useNavigate } from 'react-router-dom'
 import { UserContext } from '../App';
+import '../assets/Login.scss';
 
 function LoginPage() {
   const authState = useContext(UserContext);
