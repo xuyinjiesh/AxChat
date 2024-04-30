@@ -23,7 +23,8 @@ const ChatContainer = () => {
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
   };
-  return (
+  
+  return (  
     <div className="ChatContainer">
       <ChatCorridor sidebarWidth={sidebarWidth} />
       <div className="Sidebar"

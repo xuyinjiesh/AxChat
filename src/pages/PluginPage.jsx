@@ -2,6 +2,7 @@ import { Button, Col, Divider, Layout, Menu, Row } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet } from "react-router-dom";
 import '../assets/PluginPage.scss';
+import test_img from "../assets/test-img.jpg"
 
 const items = [
   { key: '1', label: <Link to="installed">已安装</Link> },
@@ -30,7 +31,7 @@ function PluginPage() {
         <Row gutter={10}>
           <Col className="gutter-row" span={6}>
             <div className="PluginContainer">
-              <img className="Icon"/>
+              <img className="Icon" src={test_img} />
               <div className="Info">
                 <p className="Name">翻译</p>
                 <p className="Description">一键翻译全文</p>
@@ -48,8 +49,6 @@ function PluginPage() {
             <div style={style}>col-6</div>
           </Col>
         </Row>
-
-
       </Layout>
     </div>
   );

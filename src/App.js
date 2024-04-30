@@ -11,6 +11,8 @@ import ErrorPage from './pages/ErrorPage';
 import ChatRoom from './components/ChatRoom';
 import { createContext, useState } from 'react';
 import PluginPage from './pages/PluginPage';
+import { UserInfoProvider } from './context/UserInfoContext';
+import { UserWsProvider } from './context/UserWsContext';
 
 const router = createBrowserRouter([
   {
@@ -54,15 +56,16 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const UserContext = createContext();
+
 
 function App() {
-  const [user, setUser] = useState();
-
+  
   return (
-    <UserContext.Provider value={{user, setUser}}>
-      <RouterProvider router={router} />
-    </UserContext.Provider>
+    <UserInfoProvider>
+      <UserWsProvider>
+        <RouterProvider router={router} />
+      </UserWsProvider>
+    </UserInfoProvider>
   );
 }
 

@@ -4,7 +4,7 @@ import { UserContext } from "../App";
 
 
 const ContactPage = () => {
-  const authState = useContext(UserContext);
+  // const authState = useContext(UserContext);
 
   return (
     <p id="zero-state">

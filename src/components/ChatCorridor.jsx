@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import test_img from "../assets/test-img.jpg"
 import { Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { calc } from "antd/es/theme/internal";
 import { Form } from "react-router-dom";
-
-// export async function loader({ request }) {
-//   const url = new URL(request.url);
-//   const q = url.searchParams.get("q");
-//   const info = await getInfo(q);
-//   return { info };
-// }
+import { UserInfoContext } from '../context/UserInfoContext';
+import { UserWsContext } from '../context/UserWsContext';
 
 function ChatCorridor({ sidebarWidth }) {
+
+  const {user} = useContext(UserInfoContext);
+  const [ready, val, send] = useContext(UserWsContext); // use it just like a hook
+
+  useEffect(() => {
+    if (!user) {
+      if (ready) {
+        send("test message");
+      }
+    }
+  }, [ready, send]); // make sure to include send in dependency array
+
 
   return (
     <div className="ChatCorridor" style={{

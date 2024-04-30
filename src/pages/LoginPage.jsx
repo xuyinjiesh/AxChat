@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { Form, Link, redirect, useNavigate } from 'react-router-dom'
-import { UserContext } from '../App';
+import { UserInfoContext } from '../context/UserInfoContext';
 import '../assets/Login.scss';
 
 function LoginPage() {
-  const authState = useContext(UserContext);
+  const userInfo = useContext(UserInfoContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -26,7 +26,7 @@ function LoginPage() {
       console.log(user);
       user = await response.json();
       console.log(user);
-      authState.setUser(user);
+      userInfo.setUser(user);
       navigate('/chat');
     } else {
       alert("登录失败！");

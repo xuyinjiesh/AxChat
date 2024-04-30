@@ -14,7 +14,7 @@ import test_img from "../assets/test-img.jpg";
 import { Outlet, Link, useNavigate, redirect, useLoaderData, Navigate } from 'react-router-dom';
 import Password from 'antd/es/input/Password';
 import $ from 'jquery';
-import { UserContext } from '../App';
+import { UserInfoContext } from '../context/UserInfoContext';
 
 const items = [
   { key: '1', icon: <Link to="chat"><MessageOutlined /></Link>},
@@ -24,9 +24,9 @@ const items = [
   { key: '5', icon: <SettingOutlined />},
 ];
 
-
 const Root = () => {
-  const authState = useContext(UserContext);
+
+  const authState = useContext(UserInfoContext);
   if (!authState.user) {
     return <Navigate to="/login" replace={true} />;
   }
