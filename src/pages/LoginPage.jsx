@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Form, Link, redirect, useNavigate } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext';
+import cookie from 'react-cookies';
 import '../assets/Login.scss';
 
 function LoginPage() {
@@ -14,7 +15,7 @@ function LoginPage() {
     formData.forEach((value, key) => {
       user[key] = value;
     });
-    let response = await fetch("http://172.16.3.201:8080/login", {
+    let response = await fetch("login", {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -24,9 +25,10 @@ function LoginPage() {
     });
     if (response.ok) {
       console.log(user);
-      user = await response.json();
-      console.log(user);
-      userInfo.setUser(user);
+      let data = await response.json();
+      userInfo.setUser(data);
+      console.log("hello");
+      console.log(userInfo.user);
       navigate('/chat');
     } else {
       alert("登录失败！");

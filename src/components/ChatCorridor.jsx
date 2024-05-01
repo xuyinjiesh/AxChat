@@ -9,16 +9,16 @@ import { UserWsContext } from '../context/UserWsContext';
 
 function ChatCorridor({ sidebarWidth }) {
 
-  const {user} = useContext(UserInfoContext);
-  const [ready, val, send] = useContext(UserWsContext); // use it just like a hook
+  // const {user} = useContext(UserInfoContext);
+  // const [ready, val, send] = useContext(UserWsContext); // use it just like a hook
 
-  useEffect(() => {
-    if (!user) {
-      if (ready) {
-        send("test message");
-      }
-    }
-  }, [ready, send]); // make sure to include send in dependency array
+  // useEffect(() => {
+  //   if (ready) {
+  //     send("test message");
+  //     alert(val);
+  //     }
+  //   // }
+  // }, [ready, send]); // make sure to include send in dependency array
 
 
   return (

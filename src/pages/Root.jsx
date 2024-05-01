@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons";
 import ChatContainer from "./ChatPage";
 import Sider from "antd/es/layout/Sider";
-import test_img from "../assets/test-img.jpg";
 import { Outlet, Link, useNavigate, redirect, useLoaderData, Navigate } from 'react-router-dom';
 import Password from 'antd/es/input/Password';
 import $ from 'jquery';
