@@ -1,19 +1,21 @@
 import { useContext } from 'react';
 import { Form, Link, redirect, useNavigate } from 'react-router-dom'
 import { UserInfoContext } from '../context/UserInfoContext';
+import { UserWsContext } from '../context/UserWsContext';
 import cookie from 'react-cookies';
 import '../assets/Login.scss';
 
 function LoginPage() {
-  const userInfo = useContext(UserInfoContext);
+  const [g_user, g_setUser] = useContext(UserInfoContext);
+  const [g_setSocket] = useContext(UserWsContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let user = {};
+    let dataToSend = {};
     let formData = new FormData(event.target);
     formData.forEach((value, key) => {
-      user[key] = value;
+      dataToSend[key] = value;
     });
     let response = await fetch("login", {
       method: 'POST',
@@ -21,14 +23,17 @@ function LoginPage() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(dataToSend)
     });
     if (response.ok) {
-      console.log(user);
-      let data = await response.json();
-      userInfo.setUser(data);
-      console.log("hello");
-      console.log(userInfo.user);
+      let dataReceived = await response.json();
+      console.log("登录成功");
+      console.log(dataReceived);
+      console.log(`data = ${dataReceived}`);
+      g_setUser(dataReceived);
+      console.log(`g_user = ${g_user}`);
+      g_setSocket(dataReceived.UID);
+
       navigate('/chat');
     } else {
       alert("登录失败！");
@@ -41,7 +46,7 @@ function LoginPage() {
         <span className="title">登录</span>
         <form method="post" onSubmit={handleSubmit}>
           <input name="UTelephone" type="text" placeholder="手机号" />
-          <input name="UPassword" type="text" placeholder="密码" />
+          <input name="UPassword" type="password" placeholder="密码" />
           <input type="submit"/>
         </form>
         <p>没有账户? <Link to="/register">注册</Link></p>

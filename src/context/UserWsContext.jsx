@@ -2,28 +2,33 @@ import { createContext, useEffect, useRef, useState } from "react";
 
 export const UserWsContext = createContext(false, null, () => { });
 
-
 export const UserWsProvider = ({ children }) => {
+  const ws = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [val, setVal] = useState(null);
   
-  const ws = useRef(null);
-
-  useEffect(() => {
-    const socket = new WebSocket("wss://echo.websocket.events/");
-
-    socket.onopen = () => setIsReady(true);
-    socket.onclose = () => setIsReady(false);
-    socket.onmessage = (event) => setVal(event.data);
-
-    ws.current = socket;
-
-    return () => {
-      socket.close();
+  const setSocket = (userID) => {
+    const socket = new WebSocket(`ws://172.16.3.201:8080/websocket/${userID}`);
+    socket.onopen = () => {
+      console.log(`[open] Connection established, user is ${userID}`);
+      setIsReady(true);
     };
-  }, []);
+    socket.onmessage = (event) => {
+      console.log(`[message] Data received from server: ${event.data$}`);
+      setVal(event.data) 
+    };
+    socket.onclose = (event) => {
+      if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+      } else {
+        console.log(`[close] Connection died`);
+      }
+      setIsReady(false);
+    };
+    ws.current = socket;
+  };
 
-  const ret = [isReady, val, ws.current?.send.bind(ws.current)];
+  const ret = [setSocket, isReady, val, ws.current?.send.bind(ws.current)];
 
   return (
     <UserWsContext.Provider value={ret}>

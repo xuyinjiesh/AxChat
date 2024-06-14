@@ -5,7 +5,7 @@ export class MarkdownPlugin extends Plugin {
   constructor(name) {
     super(name);
     this.initialized = false;
-    this.icon = <i class="fa-brands fa-markdown"></i>;
+    this.icon = <i className="fa-brands fa-markdown"></i>;
   }
   on(dom) {
     // add editor

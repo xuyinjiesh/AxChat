@@ -33,7 +33,7 @@ function RegisterPage() {
         <Form method="post" id="formRegister">
           <input name="UName" type="text" placeholder="昵称" />
           <input name="UTelephone" type="text" placeholder="手机号"/>
-          <input name="UPassword" type="text" placeholder="密码" />
+          <input name="UPassword" type="password" placeholder="密码" />
           <input type="submit"/>
         </Form>
         <p>已有账户? <Link to="/login">登录</Link></p>

@@ -11,8 +11,6 @@ import {
 import ChatContainer from "./ChatPage";
 import Sider from "antd/es/layout/Sider";
 import { Outlet, Link, useNavigate, redirect, useLoaderData, Navigate } from 'react-router-dom';
-import Password from 'antd/es/input/Password';
-import $ from 'jquery';
 import { UserInfoContext } from '../context/UserInfoContext';
 
 const items = [
@@ -25,16 +23,15 @@ const items = [
 
 const Root = () => {
 
-  const authState = useContext(UserInfoContext);
-  if (!authState.user) {
+  const [g_user, g_setUser] = useContext(UserInfoContext);
+  if (!g_user) {
     return <Navigate to="/login" replace={true} />;
-  }
-  
+  } 
   return (
     <div className="HomeContainer">
       <Layout style={{ minHeight: '100vh' }}>
         <Sider theme="light" collapsed="true" collapsedWidth="60px">
-          <Avatar id="avatar">{authState.user.UName}</Avatar>
+          <Avatar id="avatar">{g_user.UName}</Avatar>
           <Menu
             items={items}
             defaultSelectedKeys={['1']}

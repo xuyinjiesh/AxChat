@@ -16,8 +16,8 @@ function ChatRoom() {
         <div className="UserName">ChatGPT</div>
         <div className="ToolBar">
           {
-            pluginsForMessages.map((plugin) =>
-            (<button className="Tool" onClick={() => plugin.switch(dom)}>
+            pluginsForMessages.map((plugin, index) =>
+            (<button key={index} className="Tool" onClick={() => plugin.switch(dom)}>
               { plugin.icon }
             </button>)
             )
@@ -32,8 +32,8 @@ function ChatRoom() {
           <button className="Tool"><i className="fa-regular fa-image"></i></button>
           <button className="Tool"><i className="fa-solid fa-microphone"></i></button>
           {
-            pluginsForInput.map((plugin) =>
-            (<button className="Tool" onClick={() => plugin.switch(dom)}>
+            pluginsForInput.map((plugin, index) =>
+            (<button key={index} className="Tool" onClick={() => plugin.switch(dom)}>
               { plugin.icon }
             </button>)
             )
