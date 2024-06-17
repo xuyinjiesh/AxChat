@@ -1,0 +1,49 @@
+.baseInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.name,
+.ID {
+    margin: 0;
+}
+
+.Portrait {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.signature {
+    margin-bottom: 20px;
+}
+
+.operations {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.confirm-button:hover {
+    background-color: #0056b3;
+}

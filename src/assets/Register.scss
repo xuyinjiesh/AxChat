@@ -1,0 +1,67 @@
+@import "globals.scss";
+
+.formContainer {
+  height: 100vh;
+  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+  .formWrapper {
+    background-color: $qqwhite00;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    // backdrop-filter: blur(60px);
+    
+    .logo {
+      color: $qqblue00;
+      font-weight: bold;
+      font-size: 28px;
+    }
+    
+    .title {
+      padding-bottom: 10px;
+      color: $qqblue00;
+      font-size: 18px;      
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      input {
+        width: 200px;
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid $qqwhite2d;
+        &::placeholder {
+          color: $qqblack2l; 
+        }
+      }
+      
+      input[type="submit"] {
+        background-color: $qqblue00;
+        width: 160px;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    
+    }
+    p {
+      color: $qqblue00;
+      font-size: 14px;
+    }
+  }
+}

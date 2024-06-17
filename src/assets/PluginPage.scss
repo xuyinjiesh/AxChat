@@ -1,0 +1,35 @@
+@import "globals.scss";
+
+
+#PluginSystemContainer {
+  .PluginContainer {
+    background-color: $qqwhite2d;
+    height: 100px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    .Icon {
+      width: 40px;
+      height: 40px;
+    }
+    .Info {
+      padding: 0 10px;
+      .Name {
+        font-size: 15px;
+        color: $qqblack00;
+        padding-bottom: 3px;
+      }
+      .Description {
+        font-size: 13px;
+        color: $qqblack2l;
+      }
+    }
+    .btn-uninstall {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+  }
+}

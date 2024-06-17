@@ -1,0 +1,118 @@
+@import "Register.scss";
+
+.formWrapper {
+  z-index: 1;
+}
+
+.squares li {
+  position: absolute;
+  border: 1px solid #fff;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  animation: squares 10s linear infinite;
+
+  &:nth-child(1) {
+    top: 40vh;
+    left: 65vw;
+  }
+
+  &:nth-child(2) {
+    top: 80vh;
+    left: 10vw;
+    animation-delay: -2s;
+  }
+
+  &:nth-child(3) {
+    top: 80vh;
+    left: 85vw;
+    animation-delay: -4s;
+  }
+  
+  &:nth-child(4) {
+    top: 10vh;
+    left: 70vw;
+    animation-delay: -6s;
+  }
+
+  &:nth-child(5) {
+    top: 10vh;
+    left: 10vw;
+    animation-delay: -8s;
+  }
+
+}
+
+.circles li {
+  position: absolute;
+  border: 1px solid #fff;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  animation: circles 10s linear infinite;
+  &:nth-child(1) {
+    left: 15vw;
+  }
+  &:nth-child(2) {
+    left: 35vw;
+    animation-delay: -2s;
+  }
+  &:nth-child(3) {
+    left: 55vw;
+    animation-delay: -4s;
+  }
+  &:nth-child(4) {
+    left: 75vw;
+    animation-delay: -6s;
+  }
+  &:nth-child(5) {
+    left: 90vw;
+    animation-delay: -8s;
+  }
+  &:nth-child(6) {
+    left: 25vw;
+    animation-delay: -7s;
+  }
+}
+
+
+@keyframes squares {
+  0% {
+    transform: scale(0) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+     transform: scale(5) rotateY(1000deg);
+     opacity: 0;
+  }
+}
+
+@keyframes circles {
+  0% {
+    transform: scale(0) rotateY(0deg);
+    opacity: 1;
+    bottom: 0;
+    border-radius: 0;
+  }
+  100% {
+     transform: scale(5) rotateY(1000deg);
+     opacity: 0;
+     bottom: 90vh;
+     border-radius: 50%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

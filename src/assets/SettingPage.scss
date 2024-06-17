@@ -1,0 +1,61 @@
+.SettingsPage {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+    /* 将文本内容居中 */
+}
+
+h1 {
+    margin-bottom: 20px;
+    /* 增加标题下方的空白间距 */
+}
+
+.all {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    /* 重新将文本内容左对齐，以保持内容的一致性 */
+}
+
+.setting-item {
+    margin-bottom: 20px;
+}
+
+.confirm-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.confirm-button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 10px;
+    width: calc(100% - 42px);
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#sys_message {
+    font-style: italic;
+    color: #FF0000;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 5px 0;
+}
