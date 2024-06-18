@@ -2,12 +2,8 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../App";
 import { UserInfoContext } from "../context/UserInfoContext";
 
-
-
 const ContactPage = () => {
-  // const authState = useContext(UserContext);
-
-  const userInfo = useContext(UserInfoContext);
+  const [g_user] = useContext(UserInfoContext);
   useEffect(() => {
     alert("fa");
     let text = "hello";

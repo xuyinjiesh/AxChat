@@ -31,9 +31,8 @@ function LoginPage() {
       console.log(dataReceived);
       console.log(`data = ${dataReceived}`);
       g_setUser(dataReceived);
-      console.log(`g_user = ${g_user}`);
+      // console.log(`g_user = ${g_user}`);
       g_setSocket(dataReceived.UID);
-
       navigate('/chat');
     } else {
       alert("登录失败！");

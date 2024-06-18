@@ -62,9 +62,9 @@ function App() {
   
   return (
     <UserInfoProvider>
-      <UserWsProvider>
-        <RouterProvider router={router} />
-      </UserWsProvider>
+        <UserWsProvider>
+          <RouterProvider router={router} />
+        </UserWsProvider>
     </UserInfoProvider>
   );
 }
