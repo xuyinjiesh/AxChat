@@ -3,11 +3,14 @@ import test_img from "../assets/test-img.jpg"
 import { Avatar, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { calc } from "antd/es/theme/internal";
-import { Form, json } from "react-router-dom";
+import { Form, json, useNavigate } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
+import { UserContactContext } from "../context/UserContactContext";
 
 function ChatCorridor({ sidebarWidth }) {
+  const [g_user] = useContext(UserInfoContext);
+  const [g_contacts, setContacts] = useContext(UserContactContext)
 
   const [latestMessages, setLatestMessages] = useState({});
   const [setSocket, ready, val, send] = useContext(UserWsContext);
@@ -21,14 +24,32 @@ function ChatCorridor({ sidebarWidth }) {
     }
   };
   useEffect(() => {
-    if (ready) {
-      console.log("I received a new message in chat corridor.");
+    if (ready && val) {
       let jsonObject = JSON.parse(val);
-      console.log(jsonObject);
-      jsonObject.CDateTime = new Date(jsonObject.CDateTime);
-      setLatestMessages({...latestMessages, [jsonObject.CFriendID] : jsonObject})
+      if ("CFriendID" in jsonObject) {
+        console.log("I received a new message in chat corridor.");
+        console.log(jsonObject);
+        jsonObject.CDateTime = new Date(jsonObject.CDateTime);
+        setLatestMessages({ ...latestMessages, [jsonObject.CFriendID]: jsonObject });
+        setContacts({...g_contacts, [jsonObject.CFriendID]: jsonObject.CName});
+      }
     }
   }, [val]);
+
+  const navigate = useNavigate();
+  const enterChatroom = (CFriendID) => {
+    let now = new Date().toISOString();
+    const jsonObject = {
+      MFromID: g_user.UID,
+      MToID: CFriendID,
+      MTime: now,
+      MGetMessage: true
+    };
+    console.log(jsonObject);
+    console.log("I'm requesting chat records");
+    send(JSON.stringify(jsonObject));
+    navigate("/chat/" + CFriendID);
+  };
 
   return (
     <div className="ChatCorridor" style={{
@@ -43,7 +64,7 @@ function ChatCorridor({ sidebarWidth }) {
       </Form>
       {
         Object.entries(latestMessages).map(([key, value]) => (
-          <div className="ChatBriefWrapper">
+          <div className="ChatBriefWrapper" onClick={() => enterChatroom(key)} key={key}>
             <Avatar className="Portrait">{ value.CName }</Avatar>
             {/* <img className="Portrait" src={test_img} alt=""/> */}
             <div className="Info">

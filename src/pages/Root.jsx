@@ -21,9 +21,9 @@ const items = [
   { key: '5', icon: <SettingOutlined />},
 ];
 
-const Root = () => {
-
-  const [g_user, g_setUser] = useContext(UserInfoContext);
+function Root() {
+  
+  const [g_user] = useContext(UserInfoContext);
   if (!g_user) {
     return <Navigate to="/login" replace={true} />;
   } 

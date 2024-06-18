@@ -74,6 +74,7 @@
   .ChatRoom {
     background-color: $qqwhite1d;
     flex: 1;
+    width: 855px; // FIXME()
     display: flex;
     flex-direction: column;
     

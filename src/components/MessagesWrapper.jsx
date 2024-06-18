@@ -44,7 +44,7 @@ function MessagesWrapper() {
         <MessageContextMenu>
           <div className="Message Markdown">
           <Markdown>
-            **test**这是一首唐代诗人李白所作的诗词：朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山。全诗四句全在一个“流”字，以体现诗人遇赦之后，从此海阔天空的爽快心情。
+            **test**这是一首唐代诗人李白
           </Markdown>
           </div>
         </MessageContextMenu>

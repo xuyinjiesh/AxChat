@@ -2,34 +2,65 @@ import React, { createContext, useEffect, useRef, useState, useContext } from "r
 import MessagesWrapper from "./MessagesWrapper";
 import { MarkdownPlugin } from "../plugins/Markdown";
 import { UserWsContext } from '../context/UserWsContext';
+import { Avatar, message } from "antd";
+import { UserInfoContext } from "../context/UserInfoContext";
+import { UserContactContext } from "../context/UserContactContext";
+import { param } from "jquery";
+import { useLoaderData, useParams } from "react-router-dom";
+
+
+// export async function loader({ params }) {
+//   const FriendID = params.FriendID;
+//   return { FriendID };
+// }
 
 function ChatRoom() {
+
+  const [g_user] = useContext(UserInfoContext);
+  const [g_contacts] = useContext(UserContactContext); 
+  const FriendID = parseInt(useParams().FriendID);
+
   const dom = useRef();
   
   let pluginsForMessages = [];
 
   const [pluginsForInput, setPluginsForInput] = useState([new MarkdownPlugin("markdown")]);
+  const [messages, setMessages] = useState({});
+
+  // receive message
   const [setSocket, ready, val, send] = useContext(UserWsContext);
+  useEffect(() => {
+    if (ready && val) {
+      let jsonObject = JSON.parse(val);
+      if ("MFromID" in jsonObject && "MToID" in jsonObject) {
+        console.log("I'm requesting history message");
+        console.log(jsonObject);
+        setMessages({ ...messages, [jsonObject.MSequence]: jsonObject });
+      }
+    }
+  }, [val]);
 
   const [input, setInput] = useState("");
   const sendInput = () => {
+    const now = new Date().toISOString();
     const messageObject = {
-      toID: 2,
-      fromID: 1,
-      message: input, 
-      time: new Date().toISOString()
+      MToID: FriendID,
+      MFromID: g_user.UID,
+      MText: input,
+      MTime: now,
+      MGetMessage: false
     };
     if (ready) {
       console.log(`I'm sending messages: ${input}`);
       send(JSON.stringify(messageObject));
     };
+    setInput("");
   };
-
 
   return (
     <div className="ChatRoom" ref={dom}>
       <div className="HeaderWrapper">
-        <div className="UserName">ChatGPT</div>
+        <div className="UserName">{ g_contacts[FriendID] }</div>
         <div className="ToolBar">
           {
             pluginsForMessages.map((plugin, index) =>
@@ -40,7 +71,30 @@ function ChatRoom() {
           }
         </div>
       </div>
-      <MessagesWrapper/>
+      <div className="MessagesWrapper" >
+      {
+        Object.entries(messages).filter(
+          ([sequence, message]) => {
+            console.log("From " + message.MFromID);
+            console.log("To " + message.MToID);
+            console.log("Friend " + FriendID);
+            console.log((message.MFromID === FriendID) || (message.MToID === FriendID));
+            return (message.MFromID === FriendID) || (message.MToID === FriendID);
+        }).map(([sequence, message]) => (
+          <div key={sequence} className={
+            "MessageWrapper" + (message.MFromID === g_user.UID ? " owner" : "")}>
+            <div className="PortraitWrapper">
+              <Avatar className="Portrait">{
+                message.MFromID === g_user.UID ? g_user.UName :
+                  g_contacts[FriendID]
+              }</Avatar>
+            </div>
+            <p className="Message Ordinary">{message.MText} </p>
+          </div>
+        )
+        )
+      }
+      </div>
       <div className="InputWrapper">
         <div className="ToolBar">
           <button className="Tool"><i className="fa-regular fa-face-smile"></i></button>
