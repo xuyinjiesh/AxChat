@@ -29,6 +29,7 @@ function ChatRoom() {
   
   let pluginsForMessages = [];
   const [pluginsForInput, setPluginsForInput] = useState([new MarkdownPlugin("markdown")]);
+  const [pluginsForInputRunning, setPluginsForInputRunning] = useState([false]);
   // receive message
   const [setSocket, ready, val, send] = useContext(UserWsContext);
   useEffect(() => {
@@ -70,9 +71,7 @@ function ChatRoom() {
             pluginsForMessages.map((plugin, index) =>
             (<button key={index}
               className="Tool"
-              onClick={() => plugin.switch(dom)}
-              color="$qqblue">
-              
+              onClick={() => plugin.switch(dom)}>
               {plugin.icon}
             </button>)
             )
@@ -120,7 +119,18 @@ function ChatRoom() {
           <button className="Tool"><i className="fa-solid fa-microphone"></i></button>
           {
             pluginsForInput.map((plugin, index) =>
-            (<button key={index} className="Tool" onClick={() => plugin.switch(dom)}>
+            (<button key={index} className={"Tool" + (pluginsForInputRunning[index] ? " isRunning" : "")} onClick={
+              () => {
+                plugin.switch(dom);
+                setPluginsForInputRunning(prevs => { 
+                  const curr = [...prevs];
+                  if (curr[index] === true)
+                    curr[index] = false
+                  else curr[index] = true;
+                  return curr;
+                });
+              }
+            }>
               { plugin.icon }
             </button>)
             )

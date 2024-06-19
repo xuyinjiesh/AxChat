@@ -119,12 +119,18 @@
           padding-right: 20px;
           height: 30px;
           border: none;
+          &.isRunning {
+            color: $qqblue2d;
+          }
           i {
             font-size: 18px;
+            &:hover {
+              color: $qqblue1d;
+            }
+            &:active {
+              color: $qqblue2d;
+            }
           }            
-          &:hover {
-            // color: $qqblue00;
-          }
         }
       }
       

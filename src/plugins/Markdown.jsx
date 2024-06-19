@@ -10,6 +10,7 @@ export class MarkdownPlugin extends Plugin {
     this.icon = <i className="fa-brands fa-markdown"></i>;
   }
   on(dom) {
+    
     // add editor
     // if (this.initialized == false) {
     //   let element_inputwrapper = dom.current.querySelector(".InputWrapper");
