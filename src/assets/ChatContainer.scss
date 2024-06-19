@@ -2,6 +2,7 @@
 
 
 .ChatContainer {
+  width: 100%;
   display: flex;
   .ChatCorridor {
     width: 100%;
@@ -74,7 +75,6 @@
   .ChatRoom {
     background-color: $qqwhite1d;
     flex: 1;
-    width: 855px; // FIXME()
     display: flex;
     flex-direction: column;
     

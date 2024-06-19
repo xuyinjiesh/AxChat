@@ -8,6 +8,7 @@ import { UserContactContext } from "../context/UserContactContext";
 import { UserMessagesContext } from "../context/UserMessagesContext";
 import { param } from "jquery";
 import { useLoaderData, useParams } from "react-router-dom";
+import Markdown from "react-markdown";
 
 
 // export async function loader({ params }) {
@@ -26,9 +27,7 @@ function ChatRoom() {
   
   let pluginsForMessages = [];
   
-  const markdownPlugin = new MarkdownPlugin("markdown");
-  const [pluginsForInput, setPluginsForInput] = useState([markdownPlugin]);
-
+  const [pluginsForInput, setPluginsForInput] = useState([new MarkdownPlugin("markdown")]);
   // receive message
   const [setSocket, ready, val, send] = useContext(UserWsContext);
   useEffect(() => {
@@ -45,14 +44,14 @@ function ChatRoom() {
   const [input, setInput] = useState("");
   const sendInput = () => {
     const now = new Date().toISOString();
-    console.log("markdown is running? " + markdownPlugin.isRunning);
+    console.log("markdown is running? " + pluginsForInput[0].isRunning);
     const messageObject = {
       MToID: FriendID,
       MFromID: g_user.UID,
       MText: input,
       MTime: now,
       MGetMessage: false,
-      MIsMarkDown: markdownPlugin.isRunning
+      MIsMarkDown: pluginsForInput[0].isRunning
     };
     if (ready) {
       console.log(`I'm sending messages: ${input}`);
@@ -93,7 +92,16 @@ function ChatRoom() {
                   g_contacts[FriendID]
               }</Avatar>
             </div>
-            <p className="Message Ordinary">{message.MText} </p>
+            {
+              message.MIsMarkDown ? (
+                <div className="Message Markdown">
+                  <Markdown>
+                    {message.MText}
+                  </Markdown>
+                </div>
+              ) :
+                (<p className="Message Ordinary">{ message.MText} </p>)
+            }
           </div>
         )
         )
