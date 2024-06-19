@@ -7,12 +7,13 @@ import { Form, json, useNavigate } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
 import { UserContactContext } from "../context/UserContactContext";
+import { UserLatestMessagesContext } from "../context/UserLatestMessagesContext";
 
 function ChatCorridor({ sidebarWidth }) {
   const [g_user] = useContext(UserInfoContext);
   const [g_contacts, setContacts] = useContext(UserContactContext)
+  const [g_latestMessages, setLatestMessages] = useContext(UserLatestMessagesContext);
 
-  const [latestMessages, setLatestMessages] = useState({});
   const [setSocket, ready, val, send] = useContext(UserWsContext);
   const getTodayTimeOrDate = (date) => {
     if (date.toDateString() == new Date().toDateString()) {
@@ -30,11 +31,12 @@ function ChatCorridor({ sidebarWidth }) {
         console.log("I received a new message in chat corridor.");
         console.log(jsonObject);
         jsonObject.CDateTime = new Date(jsonObject.CDateTime);
-        setLatestMessages({ ...latestMessages, [jsonObject.CFriendID]: jsonObject });
+        setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
         setContacts({...g_contacts, [jsonObject.CFriendID]: jsonObject.CName});
       }
     }
   }, [val]);
+
 
   const navigate = useNavigate();
   const enterChatroom = (CFriendID) => {
@@ -63,7 +65,7 @@ function ChatCorridor({ sidebarWidth }) {
         />
       </Form>
       {
-        Object.entries(latestMessages).map(([key, value]) => (
+        Object.entries(g_latestMessages).map(([key, value]) => (
           <div className="ChatBriefWrapper" onClick={() => enterChatroom(key)} key={key}>
             <Avatar className="Portrait">{ value.CName }</Avatar>
             {/* <img className="Portrait" src={test_img} alt=""/> */}

@@ -13,6 +13,8 @@ import ErrorPage from './pages/ErrorPage';
 import ChatRoom, { loader as chatRoomLoader } from './components/ChatRoom';
 import { createContext, useState } from 'react';
 import PluginPage from './pages/PluginPage';
+import { UserLatestMessagesProvider } from './context/UserLatestMessagesContext';
+import { UserMessagesProvider } from './context/UserMessagesContext';
 
 const router = createBrowserRouter([
   {
@@ -63,9 +65,13 @@ function App() {
   return (
     <UserInfoProvider>
       <UserContactProvider>
-        <UserWsProvider>
-          <RouterProvider router={router} />
-        </UserWsProvider>
+        <UserLatestMessagesProvider>
+          <UserMessagesProvider>
+            <UserWsProvider>
+              <RouterProvider router={router} />
+            </UserWsProvider>
+          </UserMessagesProvider>
+        </UserLatestMessagesProvider>
       </UserContactProvider>
     </UserInfoProvider>
   );

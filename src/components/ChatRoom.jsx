@@ -5,6 +5,7 @@ import { UserWsContext } from '../context/UserWsContext';
 import { Avatar, message } from "antd";
 import { UserInfoContext } from "../context/UserInfoContext";
 import { UserContactContext } from "../context/UserContactContext";
+import { UserMessagesContext } from "../context/UserMessagesContext";
 import { param } from "jquery";
 import { useLoaderData, useParams } from "react-router-dom";
 
@@ -19,13 +20,14 @@ function ChatRoom() {
   const [g_user] = useContext(UserInfoContext);
   const [g_contacts] = useContext(UserContactContext); 
   const FriendID = parseInt(useParams().FriendID);
+  const [g_messages, setMessages] = useContext(UserMessagesContext);
 
   const dom = useRef();
   
   let pluginsForMessages = [];
-
-  const [pluginsForInput, setPluginsForInput] = useState([new MarkdownPlugin("markdown")]);
-  const [messages, setMessages] = useState({});
+  
+  const markdownPlugin = new MarkdownPlugin("markdown");
+  const [pluginsForInput, setPluginsForInput] = useState([markdownPlugin]);
 
   // receive message
   const [setSocket, ready, val, send] = useContext(UserWsContext);
@@ -35,7 +37,7 @@ function ChatRoom() {
       if ("MFromID" in jsonObject && "MToID" in jsonObject) {
         console.log("I'm requesting history message");
         console.log(jsonObject);
-        setMessages({ ...messages, [jsonObject.MSequence]: jsonObject });
+        setMessages({ ...g_messages, [jsonObject.MSequence]: jsonObject });
       }
     }
   }, [val]);
@@ -43,12 +45,14 @@ function ChatRoom() {
   const [input, setInput] = useState("");
   const sendInput = () => {
     const now = new Date().toISOString();
+    console.log("markdown is running? " + markdownPlugin.isRunning);
     const messageObject = {
       MToID: FriendID,
       MFromID: g_user.UID,
       MText: input,
       MTime: now,
-      MGetMessage: false
+      MGetMessage: false,
+      MIsMarkDown: markdownPlugin.isRunning
     };
     if (ready) {
       console.log(`I'm sending messages: ${input}`);
@@ -73,12 +77,12 @@ function ChatRoom() {
       </div>
       <div className="MessagesWrapper" >
       {
-        Object.entries(messages).filter(
+        Object.entries(g_messages).filter(
           ([sequence, message]) => {
-            console.log("From " + message.MFromID);
-            console.log("To " + message.MToID);
-            console.log("Friend " + FriendID);
-            console.log((message.MFromID === FriendID) || (message.MToID === FriendID));
+            // console.log("From " + message.MFromID);
+            // console.log("To " + message.MToID);
+            // console.log("Friend " + FriendID);
+            // console.log((message.MFromID === FriendID) || (message.MToID === FriendID));
             return (message.MFromID === FriendID) || (message.MToID === FriendID);
         }).map(([sequence, message]) => (
           <div key={sequence} className={
