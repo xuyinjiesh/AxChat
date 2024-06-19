@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Badge, Input, Space } from "antd";
+import { Avatar, Badge, Input, Space, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Form, json, useNavigate } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
 import { UserLatestMessagesContext } from "../context/UserLatestMessagesContext";
 import { UserContactContext } from "../context/UserContactContext";
+import { UserMessagesContext } from "../context/UserMessagesContext";
 
 function ChatCorridor({ sidebarWidth }) {
   const [g_user] = useContext(UserInfoContext);
   const [g_contacts, setContacts, setHasTotalMessages] = useContext(UserContactContext);
-  const [g_latestMessages, setLatestMessages] = useContext(UserLatestMessagesContext);
+  const [g_latestMessages, setLatestMessages, setRead] = useContext(UserLatestMessagesContext);
+  const [g_messages, setMessages] = useContext(UserMessagesContext);
 
   const [setSocket, ready, val, send] = useContext(UserWsContext);
   const getTodayTimeOrDate = (date) => {
@@ -24,39 +26,34 @@ function ChatCorridor({ sidebarWidth }) {
   };
   useEffect(() => {
     if (ready && val) {
-      console.log("一个标志");
-      console.log(val);
       let jsonObject = JSON.parse(val);
       if ("CFriendID" in jsonObject) {
         console.log("I received a new message in chat corridor.");
         console.log(jsonObject);
         jsonObject.CDateTime = new Date(jsonObject.CDateTime);
-        // if (!(jsonObject.CFriendID in g_latestMessages) || g_latestMessages[CFriendID] < ) {
-          
-        // }
         setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
-        // setLatestMessages(prevs => {
-        //   const currs = [...prevs];
-        //   currs[jsonObject.CFriendID] = jsonObject;
-        //   return currs;
-        // });
       }
     }
   }, [val]);
 
 
   const navigate = useNavigate();
-  const getTotalHistoryMessages = (CFriendID) => {
+  const enterChatroom = (CFriendID) => {
     let now = new Date().toISOString();
+    let getMessageMethod = 1;
+    if ("hasTotalMessages" in g_contacts[CFriendID]) {
+      getMessageMethod = 2; 
+    }
     const jsonObject = {
       MFromID: g_user.UID,
       MToID: CFriendID,
       MTime: now,
-      MGetMessage: true
+      MGetMessage: getMessageMethod
     };
     console.log(jsonObject);
     console.log("I'm requesting total history messages");
     send(JSON.stringify(jsonObject));
+    setRead(CFriendID);
   };
 
   return (
@@ -74,7 +71,7 @@ function ChatCorridor({ sidebarWidth }) {
         Object.entries(g_latestMessages).map(([FriendID, value]) => (
           <div className="ChatBriefWrapper" onClick={() => {
             if (!("hasTotalMessages" in g_contacts[FriendID])) {
-              getTotalHistoryMessages(FriendID);
+              enterChatroom(FriendID);
               setHasTotalMessages(FriendID);
             }
             navigate("/chat/" + FriendID);
@@ -90,7 +87,6 @@ function ChatCorridor({ sidebarWidth }) {
                 <span className="Message">{value.CText}</span>
                 <Badge
                   className="UnreadHint"
-                  // count={ value.CUnread }
                   count={ value.CUnread }
                   size="default"
                 />
