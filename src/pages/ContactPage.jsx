@@ -1,29 +1,35 @@
-import { useContext, useEffect } from "react";
-import { UserContext } from "../App";
-import { UserInfoContext } from "../context/UserInfoContext";
+import React, { useEffect, useState } from "react";
+import ChatCorridor from "../components/ChatCorridor";
+import ChatRoom from "../components/ChatRoom";
+import '../assets/ChatContainer.scss';
+import { Outlet } from "react-router-dom";
 
 const ContactPage = () => {
-  const [g_user] = useContext(UserInfoContext);
-  useEffect(() => {
-    alert("fa");
-    let text = "hello";
-    let response = fetch("/test", {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'text/plain'
-      },
-      body: text
-    }).then(response => response.text(),
-      response => { console.log("登录失败！"); }
-    ).then(data => {console.log(data);});
-  }, []);
+  // const authState = useContext(UserContext);
+
+  const [sidebarWidth, setSidebarWidth] = useState(300);
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+  const handleMouseMove = (e) => {
+    setSidebarWidth(e.clientX);
+  };
+  const handleMouseUp = (e) => {
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
 
   return (
-    <p id="zero-state">
-      This is a demo for React Router.
-
-    </p>
+    <div className="ChatContainer">
+      <ChatCorridor sidebarWidth={sidebarWidth} />
+      <div className="Sidebar"
+        style={{ width: `4px`, height: `100%`, cursor: `w-resize` }}
+        onMouseDown={handleMouseDown}>
+      </div>
+      <Outlet />
+    </div>
   );
 }
 

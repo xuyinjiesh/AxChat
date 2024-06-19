@@ -11,8 +11,10 @@ import ContactPage from './pages/ContactPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
 import ChatRoom, { loader as chatRoomLoader } from './components/ChatRoom';
+import FriendInfo from './components/FriendInfo';
 import { createContext, useState } from 'react';
 import PluginPage from './pages/PluginPage';
+import SettingsPage from './pages/SettingsPage';
 import { UserLatestMessagesProvider } from './context/UserLatestMessagesContext';
 import { UserMessagesProvider } from './context/UserMessagesContext';
 
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ChatPageIndex /> 
+            element: <ChatPageIndex />
           },
           {
             path: ":FriendID",
@@ -48,12 +50,26 @@ const router = createBrowserRouter([
       },
       {
         path: "contact",
-        element: <ContactPage />
+        element: <ContactPage />,
+        children: [
+          {
+            index: true,
+            element: <FriendInfo />
+          },
+          {
+            path: ":friend-name",
+            element: <FriendInfo />,
+          }
+        ]
       },
       {
         path: "plugin",
         element: <PluginPage />
       },
+      {
+        path: "settings",
+        element: <SettingsPage />
+      }
     ]
   },
 ]);
@@ -61,7 +77,7 @@ const router = createBrowserRouter([
 
 
 function App() {
-  
+
   return (
     <UserInfoProvider>
       <UserContactProvider>
