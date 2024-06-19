@@ -6,12 +6,10 @@ import { calc } from "antd/es/theme/internal";
 import { Form, json, useNavigate } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
-import { UserContactContext } from "../context/UserContactContext";
 import { UserLatestMessagesContext } from "../context/UserLatestMessagesContext";
 
 function ChatCorridor({ sidebarWidth }) {
   const [g_user] = useContext(UserInfoContext);
-  const [g_contacts, setContacts] = useContext(UserContactContext)
   const [g_latestMessages, setLatestMessages] = useContext(UserLatestMessagesContext);
 
   const [setSocket, ready, val, send] = useContext(UserWsContext);
@@ -32,7 +30,6 @@ function ChatCorridor({ sidebarWidth }) {
         console.log(jsonObject);
         jsonObject.CDateTime = new Date(jsonObject.CDateTime);
         setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
-        setContacts({...g_contacts, [jsonObject.CFriendID]: jsonObject.CName});
       }
     }
   }, [val]);

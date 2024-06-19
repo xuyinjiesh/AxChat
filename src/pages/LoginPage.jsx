@@ -4,9 +4,11 @@ import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
 import cookie from 'react-cookies';
 import '../assets/Login.scss';
+import { UserContactContext } from '../context/UserContactContext';
 
 function LoginPage() {
   const [g_user, g_setUser] = useContext(UserInfoContext);
+  const [g_contacts, g_setContacts] = useContext(UserContactContext);
   const [g_setSocket] = useContext(UserWsContext);
   const navigate = useNavigate();
 
@@ -29,10 +31,13 @@ function LoginPage() {
       let dataReceived = await response.json();
       console.log("登录成功");
       console.log(dataReceived);
-      console.log(`data = ${dataReceived}`);
-      g_setUser(dataReceived);
-      // console.log(`g_user = ${g_user}`);
-      g_setSocket(dataReceived.UID);
+      g_setUser(dataReceived.user);
+      let contacts = {};
+      dataReceived.friends.map((friend) => {
+        contacts[friend.FID] = friend;
+      });
+      g_setContacts(contacts);
+      g_setSocket(dataReceived.user.UID);
       navigate('/chat');
     } else {
       alert("登录失败！");

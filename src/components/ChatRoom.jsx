@@ -19,14 +19,15 @@ import Markdown from "react-markdown";
 function ChatRoom() {
 
   const [g_user] = useContext(UserInfoContext);
-  const [g_contacts] = useContext(UserContactContext); 
+  const [g_contacts] = useContext(UserContactContext);
+  // console.log("g_contacts");
+  // console.log(g_contacts);
   const FriendID = parseInt(useParams().FriendID);
   const [g_messages, setMessages] = useContext(UserMessagesContext);
 
   const dom = useRef();
   
   let pluginsForMessages = [];
-  
   const [pluginsForInput, setPluginsForInput] = useState([new MarkdownPlugin("markdown")]);
   // receive message
   const [setSocket, ready, val, send] = useContext(UserWsContext);
@@ -63,12 +64,16 @@ function ChatRoom() {
   return (
     <div className="ChatRoom" ref={dom}>
       <div className="HeaderWrapper">
-        <div className="UserName">{ g_contacts[FriendID] }</div>
+        <div className="UserName">{ g_contacts[FriendID].FName }</div>
         <div className="ToolBar">
           {
             pluginsForMessages.map((plugin, index) =>
-            (<button key={index} className="Tool" onClick={() => plugin.switch(dom)}>
-              { plugin.icon }
+            (<button key={index}
+              className="Tool"
+              onClick={() => plugin.switch(dom)}
+              color="$qqblue">
+              
+              {plugin.icon}
             </button>)
             )
           }
@@ -89,7 +94,7 @@ function ChatRoom() {
             <div className="PortraitWrapper">
               <Avatar className="Portrait">{
                 message.MFromID === g_user.UID ? g_user.UName :
-                  g_contacts[FriendID]
+                  g_contacts[FriendID].FName
               }</Avatar>
             </div>
             {
