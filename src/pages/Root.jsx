@@ -29,7 +29,7 @@ function Root() {
   } 
   return (
     <div className="HomeContainer">
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
         <Sider theme="light" collapsed="true" collapsedWidth="60px">
           <Avatar id="avatar">{g_user.UName}</Avatar>
           <Menu
