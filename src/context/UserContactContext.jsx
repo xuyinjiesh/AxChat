@@ -4,7 +4,16 @@ export const UserContactContext = createContext();
 
 export const UserContactProvider = ({ children }) => {
   const [contacts, setContacts] = useState({});
-  const ret = [contacts, setContacts];
+  const setHasTotalMessages = (FriendID) => {
+    const newContact = contacts[FriendID];
+    newContact.hasTotalMessages = true;
+    setContacts({
+      ...contacts, 
+      [contacts[FriendID]]: newContact
+    })
+  };
+
+  const ret = [contacts, setContacts, setHasTotalMessages];
   return (
     <UserContactContext.Provider value={ret}>
       {children}

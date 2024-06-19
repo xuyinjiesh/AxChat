@@ -9,7 +9,7 @@ import { UserContactContext } from "../context/UserContactContext";
 
 function ChatCorridor({ sidebarWidth }) {
   const [g_user] = useContext(UserInfoContext);
-  const [g_contacts] = useContext(UserContactContext);
+  const [g_contacts, setContacts, setHasTotalMessages] = useContext(UserContactContext);
   const [g_latestMessages, setLatestMessages] = useContext(UserLatestMessagesContext);
 
   const [setSocket, ready, val, send] = useContext(UserWsContext);
@@ -57,7 +57,6 @@ function ChatCorridor({ sidebarWidth }) {
     console.log(jsonObject);
     console.log("I'm requesting total history messages");
     send(JSON.stringify(jsonObject));
-    navigate("/chat/" + CFriendID);
   };
 
   return (
@@ -72,8 +71,14 @@ function ChatCorridor({ sidebarWidth }) {
         />
       </Form>
       {
-        Object.entries(g_latestMessages).map(([key, value]) => (
-          <div className="ChatBriefWrapper" onClick={() => getTotalHistoryMessages(key)} key={key}>
+        Object.entries(g_latestMessages).map(([FriendID, value]) => (
+          <div className="ChatBriefWrapper" onClick={() => {
+            if (!("hasTotalMessages" in g_contacts[FriendID])) {
+              getTotalHistoryMessages(FriendID);
+              setHasTotalMessages(FriendID);
+            }
+            navigate("/chat/" + FriendID);
+          }} key={FriendID}>
             <Avatar className="Portrait">{ g_contacts[value.CFriendID].FName }</Avatar>
             {/* <img className="Portrait" src={test_img} alt=""/> */}
             <div className="Info">
