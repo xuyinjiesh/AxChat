@@ -51,18 +51,26 @@
             color: $qqblack2l;
           }
         }
-
-        .Message {
-          position: relative;
-          font-size: 13px;
-          user-select: none;
-          width: calc(100% - 10px);
-          color: $qqblack2l;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          word-break: break-all;
-          overflow: hidden;
+        .MessageAndUnreadHint {
+          display: flex;
+          justify-content: space-between;
+          .Message {
+            position: relative;
+            font-size: 13px;
+            user-select: none;
+            width: calc(100% - 10px);
+            color: $qqblack2l;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            overflow: hidden;
+          }
+          .UnreadHint {
+            padding-left: 20px;
+            padding-right: 20px;
+          }
         }
+        
       }
     }
 

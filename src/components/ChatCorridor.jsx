@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Input, Space } from "antd";
+import { Avatar, Badge, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Form, json, useNavigate } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
@@ -79,14 +79,22 @@ function ChatCorridor({ sidebarWidth }) {
             }
             navigate("/chat/" + FriendID);
           }} key={FriendID}>
-            <Avatar className="Portrait">{ g_contacts[value.CFriendID].FName }</Avatar>
+              <Avatar className="Portrait">{ g_contacts[value.CFriendID].FName }</Avatar>
             {/* <img className="Portrait" src={test_img} alt=""/> */}
             <div className="Info">
               <div className="NameAndTime">
                 <div className="Name">{ g_contacts[value.CFriendID].FName }</div>
                 <div className="Time">{ getTodayTimeOrDate(value.CDateTime) }</div>
               </div>
-              <span className="Message">{ value.CText }</span>
+              <div className="MessageAndUnreadHint">
+                <span className="Message">{value.CText}</span>
+                <Badge
+                  className="UnreadHint"
+                  // count={ value.CUnread }
+                  count={ value.CUnread }
+                  size="default"
+                />
+              </div>
             </div>
           </div>
         ))
