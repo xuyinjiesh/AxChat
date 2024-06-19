@@ -1,5 +1,7 @@
 import { Plugin } from "./PluginSystem";
 import { useState, useEffect } from "react";
+import Vditor from "vditor";
+import "vditor/dist/index.css"
 
 export class MarkdownPlugin extends Plugin {
   constructor(name) {
@@ -28,5 +30,4 @@ export class MarkdownPlugin extends Plugin {
     // this.element_markdown.style.display = "none";
     // element_textarea.style.display = "block";
   }
-
 }

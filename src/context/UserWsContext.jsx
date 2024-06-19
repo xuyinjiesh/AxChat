@@ -12,6 +12,7 @@ export const UserWsProvider = ({ children }) => {
     socket.onopen = () => {
       console.log(`[open] Connection established, user is ${userID}`);
       setIsReady(true);
+      // setInterval(() => ws.current?.ping(), 30000);
     };
     socket.onmessage = (event) => {
       console.log(`[message] Data received from server: ${event.data$}`);
@@ -24,6 +25,7 @@ export const UserWsProvider = ({ children }) => {
         console.log(`[close] Connection died`);
       }
       setIsReady(false);
+      // setTimeout(() => setSocket(userID), 1000);
     };
     ws.current = socket;
   };

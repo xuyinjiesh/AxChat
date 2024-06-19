@@ -23,15 +23,15 @@ const items = [
   { key: '5', icon: <Link to="settings"><SettingOutlined /></Link> },
 ];
 
-const Root = () => {
-
-  const [g_user, g_setUser] = useContext(UserInfoContext);
+function Root() {
+  
+  const [g_user] = useContext(UserInfoContext);
   if (!g_user) {
     return <Navigate to="/login" replace={true} />;
   }
   return (
     <div className="HomeContainer">
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
         <Sider theme="light" collapsed="true" collapsedWidth="60px">
           <Avatar id="avatar">{g_user.UName}</Avatar>
           <Menu
