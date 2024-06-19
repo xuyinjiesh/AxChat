@@ -4,6 +4,7 @@
 .ChatContainer {
   width: 100%;
   display: flex;
+
   .ChatCorridor {
     width: 100%;
     background-color: $qqwhite00;
@@ -103,7 +104,9 @@
       }
     }
     
-    
+    .MessagesWrapper {
+      padding-bottom: 20px;
+    }
 
     .InputWrapper {
       flex: 7;

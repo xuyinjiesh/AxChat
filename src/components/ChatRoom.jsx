@@ -46,7 +46,6 @@ function ChatRoom() {
   const [input, setInput] = useState("");
   const sendInput = () => {
     const now = new Date().toISOString();
-    console.log("markdown is running? " + pluginsForInput[0].isRunning);
     const messageObject = {
       MToID: FriendID,
       MFromID: g_user.UID,
@@ -56,7 +55,8 @@ function ChatRoom() {
       MIsMarkDown: pluginsForInput[0].isRunning
     };
     if (ready) {
-      console.log(`I'm sending messages: ${input}`);
+      console.log(`I'm sending messages`);
+      console.log(messageObject);
       send(JSON.stringify(messageObject));
     };
     setInput("");
