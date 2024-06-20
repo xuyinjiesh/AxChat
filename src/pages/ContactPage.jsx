@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ChatCorridor from "../components/ChatCorridor";
+import ContactCorridor from "../components/ContactCorridor";
 import ChatRoom from "../components/ChatRoom";
 import '../assets/ChatContainer.scss';
 import { Outlet } from "react-router-dom";
@@ -23,7 +23,7 @@ const ContactPage = () => {
 
   return (
     <div className="ChatContainer">
-      <ChatCorridor sidebarWidth={sidebarWidth} />
+      <ContactCorridor sidebarWidth={sidebarWidth} />
       <div className="Sidebar"
         style={{ width: `4px`, height: `100%`, cursor: `w-resize` }}
         onMouseDown={handleMouseDown}>

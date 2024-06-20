@@ -4,7 +4,6 @@
 .ChatContainer {
   width: 100%;
   display: flex;
-
   .ChatCorridor {
     width: 100%;
     background-color: $qqwhite00;
@@ -18,7 +17,6 @@
       display: flex;
       align-items: center;
       
-
       .Portrait {
         flex: 0 0 40px;
         width: 40px;
@@ -52,54 +50,27 @@
             color: $qqblack2l;
           }
         }
-        .MessageAndUnreadHint {
-          display: flex;
-          justify-content: space-between;
-          .Message {
-            position: relative;
-            font-size: 13px;
-            user-select: none;
-            width: calc(100% - 10px);
-            color: $qqblack2l;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            word-break: break-all;
-            overflow: hidden;
-          }
-          .UnreadHint {
-            padding-left: 20px;
-            padding-right: 20px;
-          }
-        }
-        
-      }
 
-      &.Selected {
-        background-color: $qqblue00;
-        .Info {
-          .NameAndTime {
-            .Name {
-              color: $qqwhite00;
-            }
-            .Time {
-              color: $qqwhite00;
-            }
-          }
-          .MessageAndUnreadHint {
-            .Message {
-              color: white;
-            }
-          }
+        .Message {
+          position: relative;
+          font-size: 13px;
+          user-select: none;
+          width: calc(100% - 10px);
+          color: $qqblack2l;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          overflow: hidden;
         }
-        &:hover {
-          background-color: $qqblue00;
-        }
-      }
-      &:hover {
-        background-color: $qqwhite1d;
       }
     }
+
+    .ChatBriefWrapper:hover {
+      background-color: $qqwhite1d;
+    }
+
   }
+
 
   .ChatRoom {
     background-color: $qqwhite1d;
@@ -132,9 +103,7 @@
       }
     }
     
-    .MessagesWrapper {
-      padding-bottom: 20px;
-    }
+    
 
     .InputWrapper {
       flex: 7;
@@ -150,18 +119,12 @@
           padding-right: 20px;
           height: 30px;
           border: none;
-          &.isRunning {
-            color: $qqblue2d;
-          }
           i {
             font-size: 18px;
-            &:hover {
-              color: $qqblue1d;
-            }
-            &:active {
-              color: $qqblue2d;
-            }
           }            
+          &:hover {
+            // color: $qqblue00;
+          }
         }
       }
       

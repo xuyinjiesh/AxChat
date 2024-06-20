@@ -1,29 +1,50 @@
-import React, { useEffect, useState } from "react";
-import test_img from "../assets/test-img.jpg"
+import React, { useEffect, useState, useContext } from "react";
+import { Avatar } from "antd";
+import { useLoaderData, useParams } from "react-router-dom";
+import { UserContactContext } from "../context/UserContactContext";
 import "../assets/FriendInfo.scss"
 
 function FriendInfo() {
-    let UName = "李四";
-    let UID = "2";
-    let USignature = "我是李四";
+    const FID = parseInt(useParams().friendId);
+    const [g_contacts, setContacts] = useContext(UserContactContext);
+    let FName = g_contacts[FID].FName;
+    let FSignature = g_contacts[FID].FSignature;
 
-    function deleteFriends() { }
+    function deleteFriends(FID) {
+        fetch('/deleteFriend', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ ID: FID })
+        }).then(response => {
+            if (response.ok) {
+                alert("成功删除好友");
+
+            } else {
+                throw new Error('删除好友出错');
+            }
+        }).catch(error => {
+            console.error('Error adding friend:', error);
+        });
+    }
 
     function sendMessaage() { }
 
     return (
         <div className="FriendInfo">
             <div className="baseInfo">
-                <img className="Portrait" src={test_img} />
+                <Avatar className="Portrait">{FName}</Avatar>
                 <div className="userInfo">
-                    <h3 className="name">{UName}</h3>
-                    <p className="ID">{UID}</p>
+                    <h3 className="name">{FName}</h3>
+                    <p className="ID">{FID}</p>
                 </div>
             </div>
-            <p className="signature">{USignature}</p>
+            <p className="signature">{FSignature}</p>
             <div className="operations">
                 <button className="confirm-button" onClick={sendMessaage}>发消息</button>
-                <button className="confirm-button" onClick={deleteFriends}>删除好友</button>
+                <button className="confirm-button" onClick={() => deleteFriends(FID)}>删除好友</button>
             </div>
         </div>
     )
