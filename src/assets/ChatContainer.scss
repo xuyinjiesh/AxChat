@@ -18,6 +18,7 @@
       display: flex;
       align-items: center;
       
+
       .Portrait {
         flex: 0 0 40px;
         width: 40px;
@@ -72,14 +73,33 @@
         }
         
       }
-    }
 
-    .ChatBriefWrapper:hover {
-      background-color: $qqwhite1d;
+      &.Selected {
+        background-color: $qqblue00;
+        .Info {
+          .NameAndTime {
+            .Name {
+              color: $qqwhite00;
+            }
+            .Time {
+              color: $qqwhite00;
+            }
+          }
+          .MessageAndUnreadHint {
+            .Message {
+              color: white;
+            }
+          }
+        }
+        &:hover {
+          background-color: $qqblue00;
+        }
+      }
+      &:hover {
+        background-color: $qqwhite1d;
+      }
     }
-
   }
-
 
   .ChatRoom {
     background-color: $qqwhite1d;

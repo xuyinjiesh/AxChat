@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Badge, Input, Space, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { Form, json, useNavigate } from "react-router-dom";
+import { Form, json, useNavigate, useParams } from "react-router-dom";
 import { UserInfoContext } from '../context/UserInfoContext';
 import { UserWsContext } from '../context/UserWsContext';
 import { UserLatestMessagesContext } from "../context/UserLatestMessagesContext";
@@ -12,8 +12,9 @@ function ChatCorridor({ sidebarWidth }) {
   const [g_user] = useContext(UserInfoContext);
   const [g_contacts, setContacts, setHasTotalMessages] = useContext(UserContactContext);
   const [g_latestMessages, setLatestMessages, setRead] = useContext(UserLatestMessagesContext);
-  const [g_messages, setMessages] = useContext(UserMessagesContext);
-
+  const [chatRoomSelected, setChatRoomSelected] = useState({});
+  const currentFriendID = parseInt(useParams().FriendID);
+  
   const [setSocket, ready, val, send] = useContext(UserWsContext);
   const getTodayTimeOrDate = (date) => {
     if (date.toDateString() === new Date().toDateString()) {
@@ -31,7 +32,14 @@ function ChatCorridor({ sidebarWidth }) {
         console.log("I received a new message in chat corridor.");
         console.log(jsonObject);
         jsonObject.CDateTime = new Date(jsonObject.CDateTime);
-        setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
+        if (jsonObject.CFriendID === currentFriendID) {
+          enterChatroom(currentFriendID);
+          jsonObject.CUnread = 0;
+          setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
+        } else {
+          setLatestMessages({ ...g_latestMessages, [jsonObject.CFriendID]: jsonObject });
+        }
+        
       }
     }
   }, [val]);
@@ -41,7 +49,7 @@ function ChatCorridor({ sidebarWidth }) {
   const enterChatroom = (CFriendID) => {
     let now = new Date().toISOString();
     let getMessageMethod = 1;
-    if ("hasTotalMessages" in g_contacts[CFriendID]) {
+    if (g_contacts[CFriendID].hasTotalMessages) {
       getMessageMethod = 2; 
     }
     const jsonObject = {
@@ -69,14 +77,16 @@ function ChatCorridor({ sidebarWidth }) {
       </Form>
       {
         Object.entries(g_latestMessages).map(([FriendID, value]) => (
-          <div className="ChatBriefWrapper" onClick={() => {
-            if (!("hasTotalMessages" in g_contacts[FriendID])) {
+          <div
+            className={"ChatBriefWrapper" + (currentFriendID === parseInt(FriendID) ? " Selected": "")}
+            onClick={() => {
               enterChatroom(FriendID);
-              setHasTotalMessages(FriendID);
-            }
-            navigate("/chat/" + FriendID);
-          }} key={FriendID}>
-              <Avatar className="Portrait">{ g_contacts[value.CFriendID].FName }</Avatar>
+              if (!(g_contacts[FriendID].hasTotalMessages)) {
+                setHasTotalMessages(FriendID);
+              }
+              navigate("/chat/" + FriendID);
+            }} key={FriendID}>
+            <Avatar className="Portrait">{ g_contacts[value.CFriendID].FName }</Avatar>
             {/* <img className="Portrait" src={test_img} alt=""/> */}
             <div className="Info">
               <div className="NameAndTime">

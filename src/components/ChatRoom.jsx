@@ -51,7 +51,7 @@ function ChatRoom() {
       MFromID: g_user.UID,
       MText: input,
       MTime: now,
-      MGetMessage: false,
+      MGetMessage: 0,
       MIsMarkDown: pluginsForInput[0].isRunning
     };
     if (ready) {
