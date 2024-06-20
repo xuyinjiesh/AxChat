@@ -50,8 +50,8 @@ function ChatCorridor({ sidebarWidth }) {
     let now = new Date().toISOString();
     let getMessageMethod = 1;
     if (g_contacts[CFriendID].hasTotalMessages) {
-      getMessageMethod = 2; 
-    }
+      getMessageMethod = 2;
+    } 
     const jsonObject = {
       MFromID: g_user.UID,
       MToID: CFriendID,

@@ -84,7 +84,7 @@ function App() {
         <UserLatestMessagesProvider>
           <UserMessagesProvider>
             <UserWsProvider>
-              <RouterProvider router={router} />
+                <RouterProvider router={router} />
             </UserWsProvider>
           </UserMessagesProvider>
         </UserLatestMessagesProvider>

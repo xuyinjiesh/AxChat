@@ -103,8 +103,9 @@ function ChatRoom() {
                     {message.MText}
                   </Markdown>
                 </div>
-              ) :
-                (<p className="Message Ordinary">{ message.MText} </p>)
+              ) : (
+                <p className="Message Ordinary">{message.MText} </p>
+              )
             }
           </div>
         )
