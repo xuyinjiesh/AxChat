@@ -12,11 +12,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage';
 import ChatRoom, { loader as chatRoomLoader } from './components/ChatRoom';
 import FriendInfo from './components/FriendInfo';
-import { createContext, useState } from 'react';
+import FriendSearch from './components/FriendSearch';
 import PluginPage from './pages/PluginPage';
 import SettingsPage from './pages/SettingsPage';
 import { UserLatestMessagesProvider } from './context/UserLatestMessagesContext';
 import { UserMessagesProvider } from './context/UserMessagesContext';
+import RequestFromMeList from './components/RequestFromMeList';
+import RequestToMeList from './components/RequestToMeList';
 
 const router = createBrowserRouter([
   {
@@ -53,12 +55,20 @@ const router = createBrowserRouter([
         element: <ContactPage />,
         children: [
           {
-            index: true,
-            element: <FriendInfo />
+            path: ":friendId",
+            element: <FriendInfo />,
           },
           {
-            path: ":friend-name",
-            element: <FriendInfo />,
+            path: "searchFriend",
+            element: <FriendSearch />,
+          },
+          {
+            path: "requestFromMe",
+            element: <RequestFromMeList />,
+          },
+          {
+            path: "requestToMe",
+            element: <RequestToMeList />,
           }
         ]
       },

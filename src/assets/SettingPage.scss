@@ -1,8 +1,30 @@
+@import "globals.scss";
+
 .SettingsPage {
     font-family: Arial, sans-serif;
     padding: 20px;
     text-align: center;
-    /* 将文本内容居中 */
+    width: 100%;
+    overflow: auto;
+
+    &:not(:hover) {
+        &::-webkit-scrollbar-thumb {
+            background: $qqwhite1d;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: $qqwhite2d;
+    }
 }
 
 h1 {
