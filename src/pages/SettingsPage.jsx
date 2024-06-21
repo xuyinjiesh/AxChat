@@ -3,13 +3,13 @@ import { UserInfoContext } from '../context/UserInfoContext';
 import "../assets/SettingPage.scss"
 
 function SettingsPage() {
-    const [user] = useContext(UserInfoContext);
+    const [user, setUser] = useContext(UserInfoContext);
     const [UName, setUName] = useState('Original name');
     const [USignature, setSignature] = useState('Original signature');
 
     useEffect(() => {
         setUName("昵称:" + user.UName);
-        setSignature("签名:" + user.Signature);
+        setSignature("签名:" + user.USignature);
     }, [user]);
 
 
@@ -30,6 +30,8 @@ function SettingsPage() {
                 console.log(response.text());
                 showMessage('昵称更改成功');
                 document.getElementById("nickname").innerHTML = "昵称:" + newname;
+                setUser({ ...user, "UName": newname});
+
             }
 
             else {
@@ -56,6 +58,7 @@ function SettingsPage() {
                 console.log(response.text());
                 showMessage('签名更改成功');
                 document.getElementById("signature").innerHTML = "签名:" + newsignature;
+                setUser({ ...user, "USignature": newsignature });
             }
 
             else {

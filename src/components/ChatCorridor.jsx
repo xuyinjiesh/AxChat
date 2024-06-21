@@ -76,7 +76,11 @@ function ChatCorridor({ sidebarWidth }) {
         />
       </Form>
       {
-        Object.entries(g_latestMessages).map(([FriendID, value]) => (
+        Object.entries(g_latestMessages).sort(
+          ([, a], [, b]) => {
+            return b.CDateTime.getTime() - a.CDateTime.getTime();
+          }
+        ).map(([FriendID, value]) => (
           <div
             className={"ChatBriefWrapper" + (currentFriendID === parseInt(FriendID) ? " Selected": "")}
             onClick={() => {

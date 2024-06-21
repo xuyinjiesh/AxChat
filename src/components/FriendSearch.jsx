@@ -47,9 +47,7 @@ function FriendSearch() {
             body: new URLSearchParams({ toID: id })
         }).then(response => {
             if (response.ok) {
-                let message = response.text();
-                console.log(message);
-                alert(message);
+                return response.text();
             }
 
             else {
@@ -57,6 +55,8 @@ function FriendSearch() {
                 alert('好友请求发送失败');
             }
 
+        }).then(data => {
+            alert(data);
         }).catch(error => {
             console.error('Error uploading nickname:', error);
             alert('好友请求发送失败');

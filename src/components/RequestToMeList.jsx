@@ -2,9 +2,13 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import { UserContactContext } from "../context/UserContactContext";
 import { Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { UserInfoContext } from "../context/UserInfoContext";
+import { UserWsContext } from "../context/UserWsContext";
 
 function RequestToMeList() {
 
+    const [g_user] = useContext(UserInfoContext);
+    const [setSocket, ready, val, send] = useContext(UserWsContext);
     const [requestToMeList, setRequestToMeList] = useState([]);
     const [userContact, setUserContact] = useContext(UserContactContext);
 
@@ -49,6 +53,21 @@ function RequestToMeList() {
                 ...prevUserContact,
                 [data.FID]: data // 假设返回的 JSON 数据中有 UID
             }));
+            
+            // 发送一个空消息
+            const now = new Date().toISOString();
+            const messageObject = {
+                MToID: data.FID,
+                MFromID: g_user.UID,
+                MText: "",
+                MTime: now,
+                MGetMessage: 3,
+                MIsMarkDown: false
+            };
+            if (ready) {
+                send(JSON.stringify(messageObject));
+            };
+
             // 此处可以执行更新界面的操作
             updateUIAfterAccept(index);
         }).catch(error => {
