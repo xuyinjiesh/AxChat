@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 export default function ChatPageIndex() {
   return (
     <p id="zero-state">

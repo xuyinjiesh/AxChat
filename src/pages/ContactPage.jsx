@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useEffect, useState } from "react";
 import ContactCorridor from "../components/ContactCorridor";
 import ChatRoom from "../components/ChatRoom";

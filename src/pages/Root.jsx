@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import '../assets/Home.scss';
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Layout, Menu, Avatar } from "antd";
@@ -30,6 +36,7 @@ function Root() {
     return <Navigate to="/login" replace={true} />;
   }
   return (
+
     <div className="HomeContainer">
       <Layout style={{ minHeight: '100vh', maxHeight: '100vh' }}>
         <Sider theme="light" collapsed="true" collapsedWidth="60px">

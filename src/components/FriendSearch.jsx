@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useState } from 'react';
 import { Input, Button, Tooltip, Avatar } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';

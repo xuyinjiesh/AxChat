@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useEffect, useRef, useState } from "react";
 import test_img from "../assets/test-img.jpg";
 import '../assets/MessagesWrapper.scss';

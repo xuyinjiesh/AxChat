@@ -1,3 +1,10 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
+
 export class Plugin {
   
   constructor(name) {
@@ -16,12 +23,8 @@ export class Plugin {
     }
   }
 
-  on(dom) {
-    
-  }
-  off(dom) {
-    
-  }
+  on(dom) {}
+  off(dom) {}
 
 }
 

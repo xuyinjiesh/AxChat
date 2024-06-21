@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import { Button, Col, Divider, Layout, Menu, Row } from "antd";
 import { Header } from "antd/es/layout/layout";
 import { Link, Outlet } from "react-router-dom";

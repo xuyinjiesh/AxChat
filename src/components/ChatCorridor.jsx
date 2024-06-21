@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Badge, Input, Space, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";

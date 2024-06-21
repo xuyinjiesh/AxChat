@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";

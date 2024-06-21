@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useRef, useState } from "react";
 import '../assets/Register.scss';
 import { Link, redirect, Form } from 'react-router-dom'

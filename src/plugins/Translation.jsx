@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import { Plugin } from "./PluginSystem";
 import { MD5 } from "./md5";
 import { useState, useEffect } from "react";

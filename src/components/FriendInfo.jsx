@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useEffect, useState, useContext } from "react";
 import { Avatar } from "antd";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
@@ -56,7 +62,9 @@ function FriendInfo() {
         setRead(CFriendID);
     };
 
+    
     function sendMessaage() { 
+        document.getElementsByClassName("ant-menu-item")[0].click();
         enterChatroom(FID);
         if (!(g_contacts[FID].hasTotalMessages)) {
           setHasTotalMessages(FID);

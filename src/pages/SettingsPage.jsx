@@ -1,3 +1,9 @@
+/**
+ * @author Ruoxi Wang
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { useContext, useState, useEffect } from "react";
 import { UserInfoContext } from '../context/UserInfoContext';
 import "../assets/SettingPage.scss"

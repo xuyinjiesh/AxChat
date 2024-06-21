@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import React, { createContext, useEffect, useRef, useState, useContext } from "react";
 import MessagesWrapper from "./MessagesWrapper";
 import { MarkdownPlugin } from "../plugins/Markdown";

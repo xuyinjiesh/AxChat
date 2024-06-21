@@ -1,3 +1,9 @@
+/**
+ * @author Yinjie Xu
+ * @version 0.1
+ * @date 2024-06-21
+ */
+
 import { Plugin } from "./PluginSystem";
 import { useState, useEffect } from "react";
 import Vditor from "vditor";
